@@ -6,9 +6,9 @@ An AI-powered FAQ and Knowledge Base web application where authenticated users c
 
 # 🚀 Live Demo
 
-Frontend: https://your-frontend-url.vercel.app
+Frontend: https://ai-faq-builder.vercel.app
 
-Backend: https://your-backend-url.onrender.com
+Backend: https://ai-faq-builder.onrender.com
 
 ---
 
