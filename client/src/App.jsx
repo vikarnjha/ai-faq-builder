@@ -8,7 +8,8 @@ import {
 import {
   SignedIn,
   SignedOut,
-  SignIn
+  SignIn,
+  SignUp
 } from "@clerk/clerk-react";
 
 import Dashboard from "./pages/Dashboard";
@@ -16,23 +17,27 @@ import Dashboard from "./pages/Dashboard";
 function App() {
   return (
     <BrowserRouter>
+
       <Routes>
 
-        {/* Login Route */}
+        {/* SIGN IN */}
         <Route
           path="/"
           element={
             <>
               <SignedOut>
-                <div className="flex justify-center items-center min-h-screen">
+
+                <div className="flex justify-center items-center min-h-screen bg-gray-100">
+
                   <SignIn
                     routing="path"
                     path="/"
-                    signUpUrl="/"
+                    signUpUrl="/signup"
                     afterSignInUrl="/dashboard"
-                    afterSignUpUrl="/dashboard"
                   />
+
                 </div>
+
               </SignedOut>
 
               <SignedIn>
@@ -42,13 +47,47 @@ function App() {
           }
         />
 
-        {/* Dashboard */}
+        {/* SIGN UP */}
+        <Route
+          path="/signup"
+          element={
+            <>
+              <SignedOut>
+
+                <div className="flex justify-center items-center min-h-screen bg-gray-100">
+
+                  <SignUp
+                    routing="path"
+                    path="/signup"
+                    signInUrl="/"
+                    afterSignUpUrl="/dashboard"
+                  />
+
+                </div>
+
+              </SignedOut>
+
+              <SignedIn>
+                <Navigate to="/dashboard" />
+              </SignedIn>
+            </>
+          }
+        />
+
+        {/* DASHBOARD */}
         <Route
           path="/dashboard"
           element={<Dashboard />}
         />
 
+        {/* FALLBACK */}
+        <Route
+          path="*"
+          element={<Navigate to="/" />}
+        />
+
       </Routes>
+
     </BrowserRouter>
   );
 }
