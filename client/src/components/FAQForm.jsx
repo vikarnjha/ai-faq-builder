@@ -4,6 +4,8 @@ import axios from "axios";
 
 import toast from "react-hot-toast";
 
+import { FaCheck, FaTimes } from "react-icons/fa";
+
 export default function FAQForm({
   user,
   fetchFaqs,
@@ -96,56 +98,90 @@ export default function FAQForm({
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-6">
+    <div className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-2xl shadow-black/20 backdrop-blur-xl md:p-5 xl:sticky xl:top-6">
 
-      <h2 className="text-2xl font-bold mb-6">
+      <div className="flex flex-col gap-3.5 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <p className="text-xs font-medium uppercase tracking-[0.32em] text-indigo-300">
+            FAQ builder
+          </p>
 
-        {editingFaq
-          ? "Edit FAQ"
-          : "Add FAQ"}
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-white">
+            {editingFaq ? "Refine an FAQ" : "Create a new FAQ"}
+          </h2>
 
-      </h2>
+          <p className="mt-2 max-w-xl text-sm leading-6 text-slate-400">
+            Write concise questions and answers so the assistant can respond
+            with a polished, reliable tone.
+          </p>
+        </div>
+
+        <div className="inline-flex w-max shrink-0 items-center whitespace-nowrap rounded-full border border-white/10 bg-slate-950/50 px-3 py-1 text-xs font-medium text-slate-300">
+          {editingFaq ? "Editing mode" : "New entry"}
+        </div>
+      </div>
 
       <form
         onSubmit={handleSubmit}
-        className="space-y-4"
+        className="mt-5 space-y-4"
       >
 
-        <input
-          type="text"
-          placeholder="Enter question"
-          value={question}
-          onChange={(e) =>
-            setQuestion(e.target.value)
-          }
-          className="w-full border border-gray-300 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        <div className="space-y-2">
+          <label className="text-xs font-medium uppercase tracking-[0.28em] text-slate-400">
+            Question
+          </label>
 
-        <textarea
-          rows="5"
-          placeholder="Enter answer"
-          value={answer}
-          onChange={(e) =>
-            setAnswer(e.target.value)
-          }
-          className="w-full border border-gray-300 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+          <input
+            type="text"
+            placeholder="Enter question"
+            value={question}
+            onChange={(e) =>
+              setQuestion(e.target.value)
+            }
+            className="w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3.5 text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-indigo-400/50 focus:ring-2 focus:ring-indigo-500/20"
+          />
+        </div>
 
-        <input
-          type="text"
-          placeholder="Category"
-          value={category}
-          onChange={(e) =>
-            setCategory(e.target.value)
-          }
-          className="w-full border border-gray-300 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        <div className="space-y-2">
+          <label className="text-xs font-medium uppercase tracking-[0.28em] text-slate-400">
+            Answer
+          </label>
 
-        <div className="flex gap-3">
+          <textarea
+            rows="7"
+            placeholder="Enter answer"
+            value={answer}
+            onChange={(e) =>
+              setAnswer(e.target.value)
+            }
+            className="w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3.5 text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-indigo-400/50 focus:ring-2 focus:ring-indigo-500/20"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label className="text-xs font-medium uppercase tracking-[0.28em] text-slate-400">
+            Category
+          </label>
+
+          <input
+            type="text"
+            placeholder="Category (optional)"
+            value={category}
+            onChange={(e) =>
+              setCategory(e.target.value)
+            }
+            className="w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3.5 text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-indigo-400/50 focus:ring-2 focus:ring-indigo-500/20"
+          />
+        </div>
+
+        <div className="flex flex-col gap-3 pt-1.5 sm:flex-row">
 
           <button
-            className="bg-blue-600 hover:bg-blue-700 transition text-white px-6 py-3 rounded-xl"
+            type="submit"
+            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-indigo-500 px-6 py-3 font-medium text-white shadow-lg shadow-indigo-500/20 transition hover:-translate-y-0.5 hover:bg-indigo-400"
           >
+
+            <FaCheck />
 
             {editingFaq
               ? "Update FAQ"
@@ -158,8 +194,11 @@ export default function FAQForm({
             <button
               type="button"
               onClick={clearForm}
-              className="bg-gray-300 hover:bg-gray-400 transition px-6 py-3 rounded-xl"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 font-medium text-slate-200 transition hover:border-white/20 hover:bg-white/10 hover:text-white"
             >
+
+              <FaTimes />
+
               Cancel
             </button>
 
